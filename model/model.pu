@@ -1,0 +1,95 @@
+@startuml
+
+package 記事コンテキスト{
+
+class 記事 as "記事Entity/Article" << Entity >>{
+    + id: int
+    + title: string
+    + body: string
+    + created_at: datetime
+    + updated_at: datetime
+    + user_id: int
+    + category_id: int
+    + user: User
+    + category: Category
+}
+
+enum 記事ステータス as "記事ステータス/ArticleStatus" << Enum >> {
+    + 下書き
+    + 公開
+    + 非公開
+    + 削除済み
+}
+
+class 記事ファクトリ as "記事ファクトリ/ArticleFactory" << Factory >> {
+    + from(): 記事
+}
+note top of 記事ファクトリ
+    記事の生成を行う
+end note
+
+記事ステータス --> 記事
+記事ファクトリ --> 記事
+
+}
+
+package ユーザーコンテキスト{
+
+
+class ユーザー as "ユーザーEntity/UserEntity" << Entity >>{
+    + id: int
+    + name: string
+    + email: string
+    + password: string
+    + created_at: datetime
+    + updated_at: datetime
+}
+
+class ユーザーVO as "ユーザーVO/UserVO" << ValueObject >>{
+    + id: int
+    + name: string
+    + email: string
+    + password: string
+    + created_at: datetime
+    + updated_at: datetime
+}
+
+class ユーザーファクトリ as "ユーザーファクトリ/UserFactory" << Factory >> {
+    + from(): ユーザー
+}
+note top of ユーザーファクトリ
+    ユーザーの生成を行う
+end note
+
+interface ユーザーリポジトリ as "ユーザーリポジトリ/UserRepository" << Repository >> {
+    + save(): void
+    + 取得(): ユーザー
+    + 全ユーザーの取得(): List<ユーザー>
+
+}
+
+ユーザーリポジトリ --> ユーザー
+ユーザーファクトリ --> ユーザー
+ユーザーVO --> ユーザーリポジトリ
+}
+
+package 共有カーネル{   
+
+class ユーザー as "ユーザー/User" << ValueObject >>{
+    + id: int
+    + name: string
+    + email: string
+    + password: string
+    + created_at: datetime
+    + updated_at: datetime
+}
+class ユーザー取得ドメインサービス as "ユーザー取得ドメインサービス/UserGetService" << DomainService >> {
+    + get(): ユーザー   
+}
+ユーザー取得ドメインサービス --> ユーザー
+}
+
+
+
+
+@enduml
