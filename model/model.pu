@@ -41,8 +41,14 @@ class ユーザー as "ユーザーEntity/UserEntity" << Entity >>{
     + name: string
     + email: string
     + password: string
+    + user_status: UserStatus
     + created_at: datetime
     + updated_at: datetime
+}
+
+enum ユーザーステータス as "ユーザーステータス/UserStatus" << Enum >> {
+    + 有効
+    + 退会済み
 }
 
 class ユーザーVO as "ユーザーVO/UserVO" << ValueObject >>{
@@ -88,8 +94,5 @@ class ユーザー取得ドメインサービス as "ユーザー取得ドメイ
 }
 ユーザー取得ドメインサービス --> ユーザー
 }
-
-
-
 
 @enduml
