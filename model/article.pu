@@ -1,0 +1,32 @@
+@startuml
+
+class 記事 as "記事Entity/Article" << Entity >>{
+    + id: int
+    + title: string
+    + body: string
+    + created_at: datetime
+    + updated_at: datetime
+    + user_id: int
+    + category_id: int
+    + user: User
+    + category: Category
+}
+
+class 記事ステータス as "記事ステータス/ArticleStatus" << VO >> {
+    + 下書き
+    + 公開
+    + 削除済み
+    + 非公開
+}
+
+class 記事ファクトリ as "記事ファクトリ/ArticleFactory" << Factory >> {
+    + from(): Article
+}
+note top of 記事ファクトリ
+    記事の生成を行う
+end note
+
+記事ステータス --> 記事
+記事ファクトリ --> 記事
+
+@enduml
