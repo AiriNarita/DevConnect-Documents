@@ -2,7 +2,7 @@
 
 [DevConnect](https://github.com/AiriNarita/DevConnect)のドメインモデル図などをかくリポジトリ
 
-
+PlantUMLで作成
 
 ## 必要な環境の準備
 
@@ -11,7 +11,7 @@
 
  > GraphVizはdotというテキストベースの表現から有効グラフを生成できるプログラム
 
-```
+```cli
 brew install graphviz
 ```
 
