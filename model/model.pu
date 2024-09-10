@@ -35,7 +35,6 @@ end note
 
 package ユーザーコンテキスト{
 
-
 class ユーザー as "ユーザーEntity/UserEntity" << Entity >>{
     + id: int
     + name: string
